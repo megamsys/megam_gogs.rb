@@ -1,15 +1,17 @@
 module Megam
   class Gogs
-    # GET /accounts
+
     #Yet to be tested
     require 'base64'
 
     def get_repos(username=nil, password=nil)
 
-     string = '#{username}:#{password}'
-
+     string = "#{username}:#{password}"
+     puts string
      creds = Base64.encode64(string)
-     get_tokens(creds)
+     puts "Printing creds"
+     puts creds
+     get_tokens(creds, username)
 
 
       @options = {:path => "/",
@@ -21,23 +23,27 @@ module Megam
         :username => username,
         :password => password,
         :body     => @options[:body]
-        :headers  =>
+
       )
     end
 
-def get_tokens(c)
-  @options = {:path => "/",
+def get_tokens(c,u)
+  cred = " Basic #{c}"
+  @options = {:path => "/users/#{u}/tokens",
     :body => ''}.merge(@options)
+    puts "Printing cred"
+    puts cred
+    puts "-----"
 
     request(
     :expects  => 200,
     :method   => :get,
-    :username => username,
-    :password => password,
-    :body     => @options[:body]
-    :headers  =>
+    :body     => @options[:body],
+    :headers  => cred
     )
-
+   puts @response
 
   end
+
+end
 end

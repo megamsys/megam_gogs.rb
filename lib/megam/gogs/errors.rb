@@ -1,5 +1,5 @@
 module Megam
-  class Scmmanager
+  class Gogs
     module Errors
       class Error < StandardError; end
 
@@ -10,8 +10,8 @@ module Megam
           super message
           @response = response
         end
-        
-      
+
+
       end
 
       class Unauthorized < ErrorWithResponse; end
