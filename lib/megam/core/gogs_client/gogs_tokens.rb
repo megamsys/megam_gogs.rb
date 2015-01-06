@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 module Megam
-  class GogsRepo
+  class GogsTokens
 
     # Transform the ruby obj ->  to a Hash
     def self.to_hash(response)
@@ -36,7 +36,7 @@ module Megam
     def self.list(username, password)
       #acct = self.new(username, password)
       megams = Megam::Gogs.new
-      res = megams.get_repos(username, password)
+      res = megams.get_tokens(username, password)
       hash = {}
       if res.code != "200"
         hash = self.error(res)

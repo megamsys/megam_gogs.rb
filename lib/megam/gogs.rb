@@ -15,8 +15,10 @@ require "megam/gogs/accounts"
 require "megam/gogs/dumpout"
 require "megam/gogs/errors"
 require "megam/gogs/repos"
+require "megam/gogs/tokens"
 require "megam/core/gogs_client/gogs_repo"
 require "megam/core/gogs_client/gogs_account"
+
 
 module Megam
   class Gogs
@@ -52,60 +54,7 @@ module Megam
     # It is assumed that every API call will NOT use an API_KEY/email.
     def initialize(options={})
       @options = OPTIONS.merge(options)
-      puts @options
-      puts "checking header file"
     end
-=begin
-    def request(params, &block)
-      start = Time.now
-      @header = params[:headers]
-      puts "PARAMS>........."
-      text.msg "#{text.color("START", :cyan, :bold)}"
-      #username =  params[:username] || ENV['MEGAM_GOGS_USERNAME']
-      #password =  params[:password]  || ENV['MEGAM_GOGS_PASSWORD']
-      #raise ArgumentError, "You must specify [:username, :password]" if username.nil? || password.nil?
-      #text.msg "#{text.color("Got username[#{username}] [*******]", :red, :bold)}"
-
-      begin
-        httpcon = connection
-        httpcon.use_ssl = false
-        httpcon.start do |http|
-          request = Net::HTTP::Get.new(@options[:path])
-          {'key1' => @options[:headers]}
-          puts request
-        #request.basic_auth username, password
-          @response = http.request(request)
-           puts @response
-          puts "DONEOENEONEONEONEONEONEOENONE"
-      end
-      end
-      @response
-    end
-    private
-
-    #Make a lazy connection.
-    def connection
-      @options[:path] =API_REST + @options[:path]
-      @options[:headers] = @header
-
-      #HEADERS.merge({
-      #  'X-Megam-Date' =>  Time.now.strftime("%Y-%m-%d %H:%M")
-      #}).merge(@options[:headers])
-
-      text.info("HTTP Request Data:")
-      text.msg("> HTTP #{@options[:scheme]}://#{@options[:host]}")
-      @options.each do |key, value|
-        text.msg("> #{key}: #{value}")
-      end
-      text.info("End HTTP Request Data.")
-      http = Net::HTTP.new(@options[:host], @options[:port])
-      http
-    end
-
-=end
-
-
-
 
 def request(params,&block)
   #just_color_debug("#{@options[:path]}")
@@ -114,9 +63,6 @@ def request(params,&block)
   params.each do |pkey, pvalue|
     text.msg("> #{pkey}: #{pvalue}")
   end
-  @header = params[:headers]
-  puts @header.class
-  puts "------------------================="
     response = connection.request(params, &block)
     puts response
   text.msg("END(#{(Time.now - start).to_s}s)")
@@ -130,12 +76,8 @@ end
 #Make a lazy connection.
 def connection
   @options[:path] =API_REST + @options[:path]
-  @options[:headers] = @header
-
-  #encoded_api_header = encode_header(@options)
-  @options[:headers] = HEADERS.merge({
-   "Authorization:" =>  @header
-    }).merge(@options[:headers])
+  encoded_api_header = encode_header(@options)
+  @options[:headers] = HEADERS.merge({}).merge(@options[:headers])
     puts @options[:headers]
 
     text.msg("HTTP Request Data:")
@@ -152,5 +94,18 @@ def connection
     end
     @connection
   end
+
+
+  def encode_header(cmd_parms)
+    header_params ={}
+    body_digest = ()
+
+    body_base64 = Base64.encode64(body_digest)
+
+  end
+
+
+
+
 end
 end

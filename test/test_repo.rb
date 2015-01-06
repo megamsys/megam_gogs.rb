@@ -3,9 +3,8 @@ require 'nokogiri'
 
 class TestGogs < MiniTest::Unit::TestCase
   def test_getrepos
-    name = "morpheyesh"
-    pass = "123456"
-    response =megams.get_repos(name, pass)
+
+    #response =megams.get_repos(name, pass)
     assert_raises(ArgumentError)
      puts response
      puts "tadadada"
