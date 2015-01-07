@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 module Megam
-  class GogsRepo  
+  class GogsRepo
 
     # Transform the ruby obj ->  to a Hash
     def self.to_hash(response)
@@ -35,20 +35,20 @@ module Megam
     # Load a account by email_p
     def self.list(username, password)
       #acct = self.new(username, password)
-      megams = Megam::Scmmanager.new
+      megams = Megam::Gogs.new
       res = megams.get_repos(username, password)
       hash = {}
       if res.code != "200"
-         hash = self.error(res)
-       else
-         hash = self.to_hash(res)
+        hash = self.error(res)
+      else
+        hash = self.to_hash(res)
       end
       hash
     end
 
-   def self.error(response)
-     {:status => response.code, :body => "", :some_msg => response.message }
-   end
+    def self.error(response)
+      {:status => response.code, :body => "", :some_msg => response.message }
+    end
 
     def to_s
       Megam::Stuff.styled_hash(to_hash)
