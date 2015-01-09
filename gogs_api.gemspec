@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "main/gogs/version"
+require "megam/gogs/version"
 
 Gem::Specification.new do |s|
   s.name        = "megam_gogs"
   s.version     = Megam::Gogs::VERSION
   s.authors     = ["Raj Thilak,Kishorekumar Neelamegam, Thomas Alrin, Yeshwanth Kumar"]
   s.email       = ["rajthilak@megam.co.in","nkishore@megam.co.in","alrin@megam.co.in, getyesh@megam.co.in"]
-  s.homepage    = "http://github.com/indykish/megam_gogs.rb"
+  s.homepage    = "http://github.com/megamsys/megam_gogs.rb"
   s.license = "Apache V2"
   sextra_rdoc_files = ["README.md", "LICENSE" ]
   s.summary     = %q{Ruby Client for the Gogs (gogs.io)}
