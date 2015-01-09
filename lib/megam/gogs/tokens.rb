@@ -3,9 +3,10 @@ module Megam
 
     def get_tokens(username=nil, password=nil)
 
-      @options = {:path => "/users/#{username}/tokens",
-        :body => '', :username => username, :password => password}.merge(@options)
 
+      @options = {:path => "/users/#{username}/tokens",
+        :body => ''}.merge(@options)
+   
         request(
         :expects  => 200,
         :method   => :get,
