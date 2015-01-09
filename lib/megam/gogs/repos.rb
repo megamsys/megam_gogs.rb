@@ -1,25 +1,23 @@
-#module Megam
-#  class Gogs
+module Megam
+ class Gogs
 
     #Yet to be tested
-    require 'base64'
 
-    def get_repos(username=nil, password=nil)
-
+    def get_repos(token=nil)
 
 
-      @options = {:path => "/",
+
+      @options = {:path => "/user/repos",
         :body => ''}.merge(@options)
 
       request(
         :expects  => 200,
         :method   => :get,
-        :username => username,
-        :password => password,
-        :body     => @options[:body]
+        :token => token,
+        :body => @options[:body]
 
       )
     end
 
-#end
-#end
+end
+end
