@@ -75,30 +75,58 @@ def request(params,&block)
     text.msg("> #{pkey}: #{pvalue}")
   end
 
+if params[:token].nil?
+
+
   @uname = params[:username]
   @pass = params[:password]
   @cred = "#{@uname}:#{@pass}"
-  @tokens = params[:token]
   @final_cred64 = Base64.encode64(@cred)
+
   @final_hash = { :creds => "Basic #{@final_cred64}" }
-  @final_token = {:token => "token #{@tokens}"}
-    response = connection.request(dummy_params, &block)
-    puts response.inspect
+
+  response = connection_repo.request(dummy_params, &block)
+
+  puts response.inspect
   text.msg("END(#{(Time.now - start).to_s}s)")
   # reset (non-persistent) connection
-  @connection.reset
+  @connection_repo.reset
+
+else
+
+  @tokens = params[:token]
+  @final_token = { :token => "token #{@tokens}"}
+  response = connection_token.request(dummy_params, &block)
+
+  puts response.inspect
+  text.msg("END(#{(Time.now - start).to_s}s)")
+  # reset (non-persistent) connection
+  @connection_token.reset
+
+
+
+
+end
+
   response
 
 end
 
 
 #Make a lazy connection.
-def connection
+def connection_repo
   @options[:path] =API_REST + @options[:path]
   #headers_hash = encode_header(@options)
 
-  @options[:headers] = HEADERS.merge({  AUTH_PREFIX => @final_hash[:creds],
-      AUTH_PREFIX => @final_token[:token]}).merge(@options[:headers])
+  @options[:headers] = HEADERS.merge({
+    AUTH_PREFIX => @final_hash[:creds],
+
+    }).merge(@options[:headers])
+
+
+
+  puts @options[:headers]
+  puts "UNAMUNAUNAMUNAMUNAMUNAM"
 
     text.msg("HTTP Request Data:")
     text.msg("> HTTP #{@options[:scheme]}://#{@options[:host]}")
@@ -114,6 +142,37 @@ def connection
     end
     @connection
   end
+
+
+  def connection_token
+    @options[:path] =API_REST + @options[:path]
+    #headers_hash = encode_header(@options)
+
+    @options[:headers] = HEADERS.merge({
+      AUTH_PREFIX => @final_token[:token],
+
+      }).merge(@options[:headers])
+
+        puts @options[:headers]
+        puts "TESTESTESTESTSETESTSETESTESTESTES"
+
+        text.msg("HTTP Request Data:")
+        text.msg("> HTTP #{@options[:scheme]}://#{@options[:host]}")
+        @options.each do |key, value|
+          text.msg("> #{key}: #{value}")
+        end
+        text.msg("End HTTP Request Data.")
+        if @options[:scheme] == "https"
+          @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}",@options)
+        else
+          Excon.defaults[:ssl_verify_peer] = false
+          @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}:3000",@options)
+        end
+        @connection
+      end
+
+
+
 
 =begin
   def encode_header(cmd_parms)
