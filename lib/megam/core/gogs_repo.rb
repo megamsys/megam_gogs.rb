@@ -28,18 +28,18 @@ module Megam
           end
         }
       end
-      {:status => response.code, :body => index_hash, :some_msg => response.message }
+      {:status => response.status, :body => index_hash }
     end
 
 
     # Load a account by email_p
-    def self.list(username, password)
+    def self.list(token)
       #acct = self.new(username, password)
-      puts "ENTERING THE API"
+      puts "Wait! Will list repos!"
       megams = Megam::Gogs.new
-      res = megams.get_repos(username, password)
+      res = megams.get_repos(token)
       hash = {}
-      if res.code != "200"
+      if res.status != "200"
         hash = self.error(res)
       else
         hash = self.to_hash(res)
@@ -48,7 +48,7 @@ module Megam
     end
 
     def self.error(response)
-      {:status => response.code, :body => "", :some_msg => response.message }
+      {:status => response.status, :body => "" }
     end
 
     def to_s

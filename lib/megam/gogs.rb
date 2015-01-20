@@ -92,7 +92,7 @@ if params[:token].nil?
   puts response.inspect
   text.msg("END(#{(Time.now - start).to_s}s)")
   # reset (non-persistent) connection
-  @connection_repo.reset
+  #@connection_repo.reset
 
 else
 
@@ -103,13 +103,14 @@ else
   puts response.inspect
   text.msg("END(#{(Time.now - start).to_s}s)")
   # reset (non-persistent) connection
-  @connection_token.reset
+  #@connection_token.reset
 end
 
   response
 
 end
 
+private
 
 #Make a lazy connection.
 def connection_repo

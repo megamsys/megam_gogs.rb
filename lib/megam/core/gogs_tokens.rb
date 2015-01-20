@@ -28,7 +28,7 @@ module Megam
           end
         }
       end
-      {:status => response.code, :body => index_hash, :some_msg => response.message }
+      {:status => response.status, :body => index_hash }
     end
 
 
@@ -39,16 +39,18 @@ module Megam
       megams = Megam::Gogs.new
       res = megams.get_tokens(username, password)
       hash = {}
-      if res.code != "200"
-        hash = self.error(res)
-      else
+      puts res
+      puts res.status
+      #if res.status != "200"
+        #hash = self.error(res)
+      #else
         hash = self.to_hash(res)
-      end
+    #  end
       hash
     end
 
     def self.error(response)
-      {:status => response.code, :body => "", :some_msg => response.message }
+      {:status => response.status, :body => ""}
     end
 
     def to_s
