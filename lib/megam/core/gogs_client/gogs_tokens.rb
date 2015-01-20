@@ -32,9 +32,10 @@ module Megam
     end
 
 
-    # Load a account by email_p
+
     def self.list(username, password)
       #acct = self.new(username, password)
+      puts "Entering into the GOGS API successfully-0-0-0-0-0-0-0-0"
       megams = Megam::Gogs.new
       res = megams.get_tokens(username, password)
       hash = {}

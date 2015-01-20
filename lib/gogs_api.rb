@@ -1,1 +1,1 @@
-require(File.join(File.dirname(__FILE__), "main", "gogs"))
+require(File.join(File.dirname(__FILE__), "megam", "gogs"))
