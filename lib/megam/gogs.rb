@@ -19,6 +19,7 @@ require "megam/gogs/repos"
 require "megam/gogs/tokens"
 require "megam/core/gogs_client/gogs_repo"
 require "megam/core/gogs_client/gogs_account"
+require "megam/core/gogs_client/gogs_tokens"
 
 
 module Megam
@@ -38,7 +39,7 @@ module Megam
     OPTIONS = {
       :headers => {},
       :host => 'localhost',
-      :port => '3000',
+      :port => '6001',
       :nonblock => false,
       :scheme => 'http'
     }
@@ -138,7 +139,7 @@ def connection_repo
       @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}",@options)
     else
       Excon.defaults[:ssl_verify_peer] = false
-      @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}:3000",@options)
+      @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}:6001",@options)
     end
     @connection
   end
@@ -166,7 +167,7 @@ def connection_repo
           @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}",@options)
         else
           Excon.defaults[:ssl_verify_peer] = false
-          @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}:3000",@options)
+          @connection = Excon.new("#{@options[:scheme]}://#{@options[:host]}:6001",@options)
         end
         @connection
       end

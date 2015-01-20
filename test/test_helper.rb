@@ -7,7 +7,7 @@ require 'time'
 
 SANDBOX_HOST_OPTIONS = {
   :host => 'localhost',
-  :port => 3000
+  :port => 6001
 }
 
 
