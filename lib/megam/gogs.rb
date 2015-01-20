@@ -17,9 +17,10 @@ require "megam/gogs/dumpout"
 require "megam/gogs/errors"
 require "megam/gogs/repos"
 require "megam/gogs/tokens"
-require "megam/core/gogs_client/gogs_repo"
-require "megam/core/gogs_client/gogs_account"
-require "megam/core/gogs_client/gogs_tokens"
+
+require "megam/core/gogs_repo"
+require "megam/core/gogs_account"
+require "megam/core/gogs_tokens"
 
 
 module Megam
@@ -103,10 +104,6 @@ else
   text.msg("END(#{(Time.now - start).to_s}s)")
   # reset (non-persistent) connection
   @connection_token.reset
-
-
-
-
 end
 
   response
@@ -127,7 +124,7 @@ def connection_repo
 
 
   puts @options[:headers]
-  puts "UNAMUNAUNAMUNAMUNAMUNAM"
+
 
     text.msg("HTTP Request Data:")
     text.msg("> HTTP #{@options[:scheme]}://#{@options[:host]}")
@@ -155,7 +152,7 @@ def connection_repo
       }).merge(@options[:headers])
 
         puts @options[:headers]
-        puts "TESTESTESTESTSETESTSETESTESTESTES"
+
 
         text.msg("HTTP Request Data:")
         text.msg("> HTTP #{@options[:scheme]}://#{@options[:host]}")
@@ -172,26 +169,5 @@ def connection_repo
         @connection
       end
 
-
-
-
-=begin
-  def encode_header(cmd_parms)
-
-     #puts cmd_parms[:username]
-     #puts cmd_parms[:password]
-     @cred = "#{cmd_parms[:username]}:#{cmd_parms[:password]}"
-     puts @cred
-     puts "printing unamd and pass"
-    basic = 'Basic'
-     @final_cred64 = Base64.encode64(@cred)
-     puts @final_cred64
-    { :creds => "#{basic} #{@final_cred64}" }
   end
-=end
-
-
-
-
-end
 end
