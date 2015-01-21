@@ -16,30 +16,22 @@
 module Megam
   class GogsRepo
 
-    # Transform the ruby obj ->  to a Hash
+
     def self.to_hash(response)
-      index_hash = []
-      i = 0
-      config = Nokogiri::XML(response.body)
-      config.css("repositories repositories").map do |node|
-        node.children.map {|n|
-          if n.name == 'url'
-            index_hash << n.text.strip
-          end
-        }
-      end
+      puts "Enters to_hash! phew! no error!"
+      puts response.body
+      index_hash = response.body
       {:status => response.status, :body => index_hash }
     end
 
 
-    # Load a account by email_p
     def self.list(token)
-      #acct = self.new(username, password)
+      
       puts "Wait! Will list repos!"
       megams = Megam::Gogs.new
       res = megams.get_repos(token)
       hash = {}
-      if res.status != "200"
+      if res.status != 200
         hash = self.error(res)
       else
         hash = self.to_hash(res)
