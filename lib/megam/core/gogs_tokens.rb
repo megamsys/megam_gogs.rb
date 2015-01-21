@@ -18,28 +18,21 @@ module Megam
 
     # Transform the ruby obj ->  to a Hash
     def self.to_hash(response)
-      index_hash = []
-      i = 0
-      config = Nokogiri::XML(response.body)
-      config.css("repositories repositories").map do |node|
-        node.children.map {|n|
-          if n.name == 'url'
-            index_hash << n.text.strip
-          end
-        }
-      end
-      {:status => response.code, :body => index_hash, :some_msg => response.message }
+  
+       index_hash = response.body
+      {:status => response.status, :body => index_hash }
     end
 
 
 
     def self.list(username, password)
-      #acct = self.new(username, password)
-      puts "Entering into the GOGS API successfully-0-0-0-0-0-0-0-0"
+
       megams = Megam::Gogs.new
       res = megams.get_tokens(username, password)
       hash = {}
-      if res.code != "200"
+      puts res
+      puts res.status
+      if res.status != 200
         hash = self.error(res)
       else
         hash = self.to_hash(res)
@@ -48,7 +41,8 @@ module Megam
     end
 
     def self.error(response)
-      {:status => response.code, :body => "", :some_msg => response.message }
+
+      {:status => response.status, :body => ""}
     end
 
     def to_s

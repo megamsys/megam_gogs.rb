@@ -3,9 +3,9 @@ require 'nokogiri'
 
 class TestGogs < MiniTest::Unit::TestCase
   def test_getrepos
-  token = '4760a3130da97bf258d8be4d55ac8165ba7a3e55'
+  token = 'bb229aba7cea113875834c84d339ec9928666643'
     response =megams.get_repos(token)
-    assert_raises(ArgumentError)
+   
       end
 =begin
   def test_getrepos_error
