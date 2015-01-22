@@ -6,7 +6,7 @@ class TestGogs < MiniTest::Unit::TestCase
     name = "morpheyesh"
     pass = "123456"
     response =megams.get_tokens(name, pass)
-    assert_raises(ArgumentError)
+
 
   end
 
