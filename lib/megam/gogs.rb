@@ -28,7 +28,6 @@ module Megam
   class Gogs
 
    AUTH_PREFIX = 'Authorization'
-
     HEADERS = {
       'Accept' => 'application/json',
       'Accept-Encoding' => 'gzip',
