@@ -5,6 +5,7 @@ require 'openssl'
 require 'net/http'
 require 'excon'
 require 'base64'
+require 'yaml'
 
 __LIB_DIR__ = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 unless $LOAD_PATH.include?(__LIB_DIR__)
@@ -35,11 +36,22 @@ module Megam
       'X-Ruby-Platform' => RUBY_PLATFORM
 
     }
+    
+    if File.exist?("#{ENV['MEGAM_HOME']}/nilavu.yml")
+      common = YAML.load_file("#{ENV['MEGAM_HOME']}/nilavu.yml")                  #COMMON YML
+      puts "=> Loaded #{ENV['MEGAM_HOME']}/nilavu.yml"
+    else
+      puts "=> Warning ! MEGAM_HOME environment variable not set."
+      common={"api" => {}, "storage" => {}, "varai" => {}, "auth" => {}, "monitor" => {}, "gog" => {}}
+    end
+
+   gogs_host     = "#{common['gogs']['host']}" || ENV['GOGS_HOST']
+   gogs_port     = "#{common['gogs']['port']}" || ENV['GOGS_PORT']  
 
     OPTIONS = {
       :headers => {},
-      :host => 'localhost',
-      :port => '6001',
+      :host => gogs_host,
+      :port => gogs_port,
       :nonblock => false,
       :scheme => 'http'
     }
