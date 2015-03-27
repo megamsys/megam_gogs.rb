@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in megam_api.gemspec
+# Specify your gem's dependencies in megam_gogs.gemspec
 gemspec

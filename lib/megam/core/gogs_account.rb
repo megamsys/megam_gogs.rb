@@ -169,7 +169,7 @@ module Megam
       acct.displayName(o["displayName"]) if o.has_key?("displayName]")
       acct.lastModified(o["lastModifiec"]) if o.has_key?("lastModified")
       acct.active(o["active"]) if o.has_key?("active")
-      acct.some_msg[:code] = o["code"] if o.has_key?("code")
+      acct.some_msg[:status] = o["status"] if o.has_key?("status")
       acct.some_msg[:msg_type] = o["msg_type"] if o.has_key?("msg_type")
       acct.some_msg[:msg]= o["msg"] if o.has_key?("msg")
       acct.some_msg[:links] = o["links"] if o.has_key?("links")
