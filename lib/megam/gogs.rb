@@ -42,7 +42,7 @@ module Megam
       puts "=> Loaded #{ENV['MEGAM_HOME']}/nilavu.yml"
     else
       puts "=> Warning ! MEGAM_HOME environment variable not set."
-      common={"api" => {}, "storage" => {}, "varai" => {}, "auth" => {}, "monitor" => {}, "gog" => {}}
+      common={"api" => {}, "storage" => {}, "varai" => {}, "auth" => {}, "monitor" => {}, "gogs" => {'host' => "", 'port' => ""}}
     end
 
    gogs_host     = "#{common['gogs']['host']}" || ENV['GOGS_HOST']
