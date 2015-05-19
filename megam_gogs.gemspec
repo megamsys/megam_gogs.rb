@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "megam_gogs"
   s.version     = Megam::Gogs::VERSION
   s.authors     = ["Raj Thilak,Kishorekumar Neelamegam, Thomas Alrin, Yeshwanth Kumar"]
-  s.email       = ["rajthilak@megam.co.in","nkishore@megam.co.in","alrin@megam.co.in, getyesh@megam.co.in"]
+  s.email       = ["rajthilak@megam.io","nkishore@megam.io","alrin@megam.io, getyesh@megam.io"]
   s.homepage    = "http://github.com/megamsys/megam_gogs.rb"
   s.license = "Apache V2"
   sextra_rdoc_files = ["README.md", "LICENSE" ]
@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,fea,tures}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.add_runtime_dependency 'highline', '~> 1.6'
+  s.add_runtime_dependency 'highline', '~> 1.7'
   s.add_runtime_dependency 'nokogiri', '~> 1.6'
-  s.add_development_dependency 'minitest', '~> 5.2'
-  s.add_development_dependency 'rake', '~> 10.1'
+  s.add_development_dependency 'minitest', '~> 5.6'
+  s.add_development_dependency 'rake', '~> 10.4'
 end
