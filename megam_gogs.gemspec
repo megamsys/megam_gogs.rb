@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,fea,tures}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.add_runtime_dependency 'highline', '~> 1.7.2'
+  s.add_runtime_dependency 'highline', '~> 1.7'
   s.add_runtime_dependency 'nokogiri', '~> 1.6'
   s.add_development_dependency 'minitest', '~> 5.6'
   s.add_development_dependency 'rake', '~> 10.4'
